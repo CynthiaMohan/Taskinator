@@ -220,21 +220,21 @@ var saveTasks = function () {
 };
 
 var loadTasks = function () {
-    debugger;
+    // debugger;
     //Get task items from the local storage
     var savedTasks = localStorage.getItem("tasks");
-    console.log(savedTasks);
+    // console.log(savedTasks);
     if (!savedTasks) {
         // task = [];
         return false;
     }
     //Convert from string format back to array
-    savedTasks = JSON.parse(tasks);
+    savedTasks = JSON.parse(savedTasks);
 
     //Iterate through all the task elements on the page 
     for (i = 0; i < savedTasks.length; i++) {
-        console.log(savedTasks[i]);
-        tasks[i].id = taskIdCounter;
+        // console.log(savedTasks[i]);
+        // tasks[i].id = taskIdCounter;
         createTaskEl(savedTasks[i]);
     };
 };
