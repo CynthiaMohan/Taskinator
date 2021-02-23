@@ -48,11 +48,11 @@ var createTaskEl = function (taskDataObj) {
     taskInfoEl.className = "task=info";
     //add inner html elements
     taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
-    console.log(taskInfoEl);
+    // console.log(taskInfoEl);
 
     listItemEl.appendChild(taskInfoEl);
     var taskActionsEl = createTaskActions(taskIdCounter);
-    console.log(taskActionsEl);
+    // console.log(taskActionsEl);
     listItemEl.appendChild(taskActionsEl);
     //appent the list item
     tasksToDoEl.appendChild(listItemEl);
@@ -219,7 +219,28 @@ var saveTasks = function () {
     localStorage.setItem("Tasks", JSON.stringify(tasks));
 };
 
+var loadTasks = function () {
+    debugger;
+    //Get task items from the local storage
+    var savedTasks = localStorage.getItem("tasks");
+    console.log(savedTasks);
+    if (!savedTasks) {
+        // task = [];
+        return false;
+    }
+    //Convert from string format back to array
+    savedTasks = JSON.parse(tasks);
+
+    //Iterate through all the task elements on the page 
+    for (i = 0; i < savedTasks.length; i++) {
+        console.log(savedTasks[i]);
+        tasks[i].id = taskIdCounter;
+        createTaskEl(savedTasks[i]);
+    };
+};
 
 formEl.addEventListener("submit", taskFormHandler);
 pageContentEl.addEventListener("click", taskButtonHandler);
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
+
+loadTasks();
